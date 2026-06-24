@@ -1,0 +1,14 @@
+*.o
+*.obj
+*.d
+*.dep
+
+build/
+
+.vscode/
+.idea/
+*.swp
+*~
+
+.DS_Store
+Thumbs.db
