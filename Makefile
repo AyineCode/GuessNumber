@@ -28,7 +28,7 @@ all : $(TARGET)
 $(TARGET) : $(OBJ)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
-	@echo "Build complete!"
+	@echo "\033[0;32mBuild complete!\033[0m"
 
 $(BUILD_DIR)/%.o : $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
