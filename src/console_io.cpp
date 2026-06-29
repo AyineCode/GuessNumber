@@ -14,7 +14,7 @@ std::optional<int> ConsoleInput::getGuess(){
         char cur = buf[i];
         if((cur >= '0' && cur <= '9') || (i == 0 && cur == '-')){
             ans[i] = cur;
-        }else if(cur == '\0' || cur == '\n' || cur == '\t'){
+        }else if(i > 0 && (cur == '\0' || cur == '\n' || cur == '\t')){
             ans[i] = '\0';
             int guess = atoi(ans); // unsafe!
             return guess;

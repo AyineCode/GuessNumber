@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra
+CXXFLAGS := -std=c++20 -Wall -Wextra
 LDFLAGS :=
 
 SRC_DIR := src
@@ -43,6 +43,10 @@ clean :
 
 .PHONY : run
 run : $(TARGET)
+	@./$(TARGET) 2>/dev/null
+
+.PHONY : debug
+debug : $(TARGET)
 	@./$(TARGET)
 
 .PHONY: help
