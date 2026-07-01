@@ -12,7 +12,7 @@ std::optional<int> ConsoleInput::getGuess(){
     int i = 0;
     for(; i < 12; i++){
         char cur = buf[i];
-        if((cur >= '0' && cur <= '9') || (i == 0 && cur == '-')){
+        if((cur >= '0' && cur <= '9') || (i == 0 && cur == '-' && (buf[1] >= '0' && buf[1] <= '9'))){
             ans[i] = cur;
         }else if(i > 0 && (cur == '\0' || cur == '\n' || cur == '\t')){
             ans[i] = '\0';
@@ -48,7 +48,7 @@ void ConsoleOutput::showRecordBoard(const std::vector<GameRecord> &tops)
     if (!tops.empty()) {
         printf("🏆 Hall of Fame (least guesses):\n");
         for (size_t i = 0; i < tops.size(); ++i) {
-            printf("  No.%ld   %d guess(es), range %d-%d    %s\n", i + 1, tops[i].attempt, tops[i].config.minNum, tops[i].config.maxNum, tops[i].date.c_str());
+            printf("  No.%ld   %d guess(es), range  %d ~ %d    %s\n", i + 1, tops[i].attempt, tops[i].config.minNum, tops[i].config.maxNum, tops[i].date.c_str());
         }
     }
 }

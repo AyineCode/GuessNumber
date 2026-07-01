@@ -38,6 +38,8 @@ inline const char* getLogLevel(LogLevel lvl){
 
 class Logger{
 protected:
+    LogLevel _min_fileLevel;
+    LogLevel _min_errLevel;
     LogLevel _minLevel;
     bool _showFile;
     std::ofstream _logFile;
@@ -45,7 +47,7 @@ protected:
 public:
     static Logger& Instance();
     virtual ~Logger();
-    virtual int setMinLevel(LogLevel lvl);
+    virtual int setMinLevel(LogLevel flvl, LogLevel elvl);
     virtual int setShowFile(bool isShow);
     virtual LogLevel minLevel() const;
     virtual int enableFile(const char filepath[]);

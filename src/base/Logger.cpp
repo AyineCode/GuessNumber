@@ -7,7 +7,13 @@
 
 #include "guessnumber/base/FormatTime.hpp"
 
-Logger::Logger() : _minLevel(LogLevel::INFO), _showFile(true){}
+Logger::Logger() : _min_fileLevel(LogLevel::INFO), _min_errLevel(LogLevel::ERROR), _showFile(true){
+    if(_min_fileLevel <= _min_errLevel){
+        _minLevel = _min_fileLevel;
+    }else{
+        _minLevel = _min_errLevel;
+    }
+}
 
 Logger& Logger::Instance(){
     static Logger logger;
@@ -18,9 +24,17 @@ Logger::~Logger(){
     _logFile.close();
 }
 
-int Logger::setMinLevel(LogLevel lvl)
+int Logger::setMinLevel(LogLevel flvl, LogLevel elvl)
 {
-    _minLevel = lvl;
+    _min_fileLevel = flvl;
+    _min_errLevel = elvl;
+
+    if(_min_fileLevel <= _min_errLevel){
+        _minLevel = _min_fileLevel;
+    }else{
+        _minLevel = _min_errLevel;
+    }
+
     return 0;
 }
 
@@ -55,9 +69,9 @@ int Logger::log(const char file[], const int line, const LogLevel lvl, const cha
     std::string fileShowing = _showFile ? std::string("[") + file + ":line " + std::to_string(line) + "] " : "";
     std::string fullLine = "[" + oss.str() + "] [" + getLogLevel(lvl) + "] " + fileShowing + msg + "\n";
 
-    std::cerr << fullLine;
+    if(lvl >= _min_errLevel)std::cerr << fullLine;
 
-    if(_logFile.is_open()){
+    if(lvl >= _min_fileLevel && _logFile.is_open()){
         _logFile << fullLine;
         _logFile.flush();
     }
