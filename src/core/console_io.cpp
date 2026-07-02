@@ -51,6 +51,7 @@ void ConsoleOutput::showRecordBoard(const std::vector<GameRecord> &tops)
             printf("  No.%ld   %d guess(es), range  %d ~ %d    %s\n", i + 1, tops[i].attempt, tops[i].config.minNum, tops[i].config.maxNum, tops[i].date.c_str());
         }
     }
+    printf("\n");
 }
 
 void ConsoleOutput::showTooHigh(int delta)

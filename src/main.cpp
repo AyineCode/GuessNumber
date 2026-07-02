@@ -13,7 +13,7 @@
 int main(const int argc, const char* argv[]){
     const char* home = std::getenv("HOME");
 
-    std::string logDir = home ? std::string(home) + "/.guessNumber" : "./.guessNumber";
+    std::string logDir = home ? std::string(home) + "/.local/share/.guessnumber" : "./.guessnumber";
     std::system(("mkdir -p " + logDir).c_str());
     Logger::Instance().setMinLevel(LogLevel::INFO, LogLevel::ERROR);
     Logger::Instance().setShowFile(false);
@@ -32,7 +32,7 @@ int main(const int argc, const char* argv[]){
     case CliOpt::ERROR:
         LOG_ERROR("Command line parsing error: " << cli.errorMsg);
         printf("\033[0;31m%s\033[0m\n", cli.errorMsg.c_str());
-        printHelp(argv[0]);
+        printf("You can use \"%s --help\" to see how to use options.\n", argv[0]);
         return 1;
     case CliOpt::VERSION:
         printVersion();

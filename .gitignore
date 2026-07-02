@@ -4,6 +4,7 @@
 *.dep
 
 build/
+temp_build.log
 
 .vscode/
 .idea/
